@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "squad-In"
+  "defaultProject": "squad-In",
+  "cli": {
+    "analytics": "de911538-5bca-4c69-b6b1-38d2ca81fbbe"
+  }
 }

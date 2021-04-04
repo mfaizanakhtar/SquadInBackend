@@ -15,6 +15,8 @@ router.post('/', async(req, res)=> {
     feed = new Feed({
         userid:req.body.userid,
         Activityname:req.body.Activityname,
+        sport:req.body.sport,
+        NoOfPlayers:req.body.NoOfPlayers,
         ActivityDescription:req.body.ActivityDescription,
         TimeStamp:req.body.TimeStamp
     })
@@ -24,8 +26,15 @@ router.post('/', async(req, res)=> {
     res.send("Post added");
 })
 
-router.get('/',async(req,res)=>{
+router.get('/all',async(req,res)=>{
     const feed = await Feed.find().populate('userid','name userType');
+    res.send(feed);
+})
+router.get('/user/:id',async(req,res)=>{
+    const feed = await Feed.find({
+        userid:req.params.id
+    })
+    .populate('userid','name userType');
     res.send(feed);
 })
 

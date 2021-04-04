@@ -11,6 +11,7 @@ const events = require('./routes/events');
 const messages = require('./routes/messages');
 const feeds = require('./routes/feeds');
 const socket = require('socket.io');
+const activityResponse = require('./routes/activityresponses');
 const { disableDebugTools } = require('@angular/platform-browser');
 const bodyParser = require('body-parser');
 var cors = require('cors');
@@ -157,6 +158,7 @@ app.use('/api/equipments',equipments);
 app.use('/api/events',events);
 app.use('/api/messages',messages);
 app.use('/api/feed',feeds);
+app.use('/api/activityResponses',activityResponse)
 
 
 
