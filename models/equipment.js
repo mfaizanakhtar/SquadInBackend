@@ -32,7 +32,7 @@ const equipmentSchema = new mongoose.Schema({
      Summary: {
         type: String,
         required: true,
-     },
+     }
 
     
 
