@@ -4,6 +4,12 @@ const jwt = require("jsonwebtoken");
 const config = require('config');
 
 const equipmentSchema = new mongoose.Schema({
+
+    userid:
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
     equipmentname: {
         type:String,
         required: true,
@@ -35,6 +41,7 @@ const equipmentSchema = new mongoose.Schema({
 
 function validateEquipment(equipment) {
     const schema = {
+        userid: Joi.string().required(),
         equipmentname: Joi.string().required(),
         EquipmentCategory: Joi.string().required(),
         quantity: Joi.string().required(),

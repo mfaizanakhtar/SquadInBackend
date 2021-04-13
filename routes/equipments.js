@@ -16,8 +16,9 @@ router.post('/', async(req, res)=> {
     //req.body = JSON.parse(req.body.body);
     const {error} = validate(req.body);
     if (error) { console.log(error); return res.status(400).send(error.details[0].message);}
-   
+
         equipment = new Equipment({ 
+        userid:req.body.userid,
         equipmentname: req.body.equipmentname,
         EquipmentCategory: req.body.EquipmentCategory,
         quantity: req.body.quantity,
@@ -27,9 +28,20 @@ router.post('/', async(req, res)=> {
     });
 
     await equipment.save();
-    
-    res.send(_.pick(equipment, ["_id","equipmentname","EquipmentCategory","quantity","Price","Summary"]));
+    res.send("Post added");
+    // res.send(_.pick(equipment, ["_id","equipmentname","EquipmentCategory","quantity","Price","Summary"]));
     //res.header('x-auth-token', token).send(_.pick(user, ["_id","name","email","userType"]));
+})
+router.get('/all',async(req,res)=>{
+    const equipment = await Equipment.find().populate('userid','name userType');
+    res.send(equipment);
+})
+router.get('/user/:id',async(req,res)=>{
+    const equipment = await Equipment.find({
+        userid:req.params.id
+    })
+    .populate('userid','name userType');
+    res.send(equipment);
 })
 
 
@@ -40,9 +52,16 @@ router.post('/', async(req, res)=> {
 // })
 //[auth, admin]
 router.get('/equipment',  async (req, res) => {
-    const stat = await Stat.findById(req.equipment._id);
+    const equipment = await Equipment.find();
     res.send(equipment);
 });
+
+router.post('/sport', async(req, res)=> {
+    //if(!req.params.id) return res.status(400).send("No ID provided");
+    let equipment = await Equipment.find ( { id:req.body.id, EquipmentCategory:req.body.sports })
+    res.send(equipment);
+})
+
 
 //router.get('/me', [auth, admin], async (req, res) => {
 // router.get('/:id', async (req, res) => {
