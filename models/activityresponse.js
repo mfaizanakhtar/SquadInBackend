@@ -23,7 +23,19 @@ const activityResponseSchema = new mongoose.Schema({
     Address:{
         type:String,
         required:true
+    },
+    Accept:{
+        type:Boolean,
+        default:null
+    },
+    AcceptMessage:{
+        type:String
+    },
+    AcceptById:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
     }
+    
 })
 
 const activityResponse=mongoose.model('activityResponse',activityResponseSchema);

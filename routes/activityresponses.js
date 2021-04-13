@@ -33,4 +33,30 @@ router.get('/user/:userid',async(req,res)=>{
     res.send(actResponse);
 })
 
+router.put('/accept/:responseid',async(req,res)=>{
+    // console.log('api called'+req.params.responseid)
+    const acceptRes = await activityResponse.updateMany({
+        _id:req.params.responseid
+    },{
+        $set:{
+        Accept:true,
+        AcceptMessage:req.body.acceptmessage,
+        AcceptById:req.body.AcceptById
+    }
+    })
+    console.log(acceptRes)
+    res.send(acceptRes)
+})
+
+router.get('/acceptby/:acceptid',async(req,res)=>{
+    const actRes = await activityResponse.find({
+        AcceptById:req.params.acceptid
+    }
+    )
+    .populate('userid','name')
+    .populate('feedid')
+    console.log(actRes)
+    res.send(actRes)
+})
+
 module.exports = router
