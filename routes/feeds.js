@@ -38,4 +38,11 @@ router.get('/user/:id',async(req,res)=>{
     res.send(feed);
 })
 
+router.delete('/feed/:id',async(req,res)=>{
+    const feed = await Feed.deleteOne({
+        _id:req.params.id
+    })
+    res.send(feed)
+})
+
 module.exports = router;

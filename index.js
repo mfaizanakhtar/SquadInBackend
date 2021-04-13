@@ -10,6 +10,7 @@ const equipments = require('./routes/equipments');
 const events = require('./routes/events');
 const messages = require('./routes/messages');
 const feeds = require('./routes/feeds');
+const Notification = require('./routes/notifications')
 const socket = require('socket.io');
 const activityResponse = require('./routes/activityresponses');
 const { disableDebugTools } = require('@angular/platform-browser');
@@ -159,6 +160,7 @@ app.use('/api/events',events);
 app.use('/api/messages',messages);
 app.use('/api/feed',feeds);
 app.use('/api/activityResponses',activityResponse)
+app.use('/api/notifications',Notification)
 
 
 
