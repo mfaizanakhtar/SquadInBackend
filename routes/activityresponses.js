@@ -48,15 +48,25 @@ router.put('/accept/:responseid',async(req,res)=>{
     res.send(acceptRes)
 })
 
-router.get('/acceptby/:acceptid',async(req,res)=>{
-    const actRes = await activityResponse.find({
-        AcceptById:req.params.acceptid
-    }
-    )
+// router.get('/acceptby/:acceptid',async(req,res)=>{
+//     const actRes = await activityResponse.find({
+//         AcceptById:req.params.acceptid
+//     }
+//     )
+//     .populate('userid','name')
+//     .populate('feedid')
+//     console.log(actRes)
+//     res.send(actRes)
+// })
+
+router.get('/accepteduser/:userid',async(req,res)=>{
+    const actResponse = await activityResponse.find({
+        userid:req.params.userid,
+        Accept:true
+    })
     .populate('userid','name')
     .populate('feedid')
-    console.log(actRes)
-    res.send(actRes)
+    res.send(actResponse);
 })
 
 module.exports = router
