@@ -44,6 +44,18 @@ router.get('/me',[auth,player,organizer,recruiter],  async (req, res) => {
     res.send(user);
 });
 
+router.get('/numberofplayers',  async (req, res) => {
+    var user =  User.find();
+user.countDocuments({userType:"Player"},function (err, count) {
+    if (err) res.send(err)
+    else res.json(count)
+    
+    
+});
+
+});
+
+
 //router.get('/me', [auth, admin], async (req, res) => {
 router.get('/:id', async (req, res) => {
     let user = await User.findById(req.params.id)

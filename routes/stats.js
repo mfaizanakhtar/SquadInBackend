@@ -24,12 +24,13 @@ router.post('/', async(req, res)=> {
         matches: req.body.matches,
         Performance: req.body.Performance,
         Summary: req.body.Summary,
+        link: req.body.link,
 
     });
 
     await stat.save();
     
-    res.send(_.pick(stat, ["_id","name","SportsCategory","Performance","Summary"]));
+    res.send(_.pick(stat, ["_id","name","SportsCategory","Performance","Summary","link"]));
     //res.header('x-auth-token', token).send(_.pick(user, ["_id","name","email","userType"]));
 })
 

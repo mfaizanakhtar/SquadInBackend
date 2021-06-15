@@ -2,6 +2,7 @@ const Joi = require('joi');
 const mongoose = require('mongoose');
 const jwt = require("jsonwebtoken");
 const config = require('config');
+const any = require('joi/lib/types/any');
 
 const statSchema = new mongoose.Schema({
     id:{
@@ -32,6 +33,10 @@ const statSchema = new mongoose.Schema({
         type: String,
         required: true,
      },
+     link:{
+         type:String,
+         required: true,
+     }
 
     
 
@@ -46,6 +51,7 @@ function validateStat(stat) {
         matches: Joi.string().required(),
         Performance: Joi.string().required(),
         Summary:Joi.string().required(),
+        link:Joi.string().required(),
     
     };
     return Joi.validate(stat, schema);

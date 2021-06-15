@@ -17,6 +17,7 @@ const activityResponse = require('./routes/activityresponses');
 const { disableDebugTools } = require('@angular/platform-browser');
 const bodyParser = require('body-parser');
 var cors = require('cors');
+const comment = require('./routes/comments')
 
 
 email=[];
@@ -163,6 +164,7 @@ app.use('/api/feed',feeds);
 app.use('/api/activityResponses',activityResponse)
 app.use('/api/notifications',Notification)
 app.use('/api/EquipmentResponse',EquipmentResponse)
+app.use('/api/comments',comment);
 
 
 

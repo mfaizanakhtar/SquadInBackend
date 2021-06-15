@@ -45,4 +45,15 @@ router.delete('/feed/:id',async(req,res)=>{
     res.send(feed)
 })
 
+router.get('/cricket',  async (req, res) => {
+    var feed =  Feed.find();
+feed.countDocuments({sport:"cricket"},function (err, count) {
+    if (err) res.send(err)
+    else res.json(count)
+    
+    
+});
+
+});
+
 module.exports = router;
