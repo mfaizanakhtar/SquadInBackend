@@ -14,8 +14,8 @@ const recruiter = require('../middleware/recruiter');
 router.post('/', async (req, res) => {
     console.log(req.body);
     //req.body = JSON.parse(req.body.body);
-    const { error } = validate(req.body);
-    if (error) { console.log(error); return res.status(400).send(error.details[0].message); }
+    // const { error } = validate(req.body);
+    // if (error) { console.log(error); return res.status(400).send(error.details[0].message); }
 
     events = new Event({
         eventname: req.body.eventname,
@@ -39,7 +39,7 @@ router.post('/', async (req, res) => {
 //     res.send(user);
 // })
 //[auth, admin]
-router.get('/events', async (req, res) => {
+router.get('/', async (req, res) => {
     const events = await Event.find();
     res.send(events);
 });

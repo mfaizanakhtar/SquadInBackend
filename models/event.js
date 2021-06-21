@@ -6,9 +6,7 @@ const config = require('config');
 const eventSchema = new mongoose.Schema({
     eventname: {
         type:String,
-        required: true,
-        minlength:5,
-        maxlength:50
+        required: true
     },
     EventCategory: {
         type: String,
@@ -20,8 +18,7 @@ const eventSchema = new mongoose.Schema({
         required: true
     },
     eventtime: {
-        type: String,
-        required: true,
+        type: String
      },
      Summary: {
         type: String,
