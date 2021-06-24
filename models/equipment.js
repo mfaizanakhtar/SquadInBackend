@@ -13,8 +13,7 @@ const equipmentSchema = new mongoose.Schema({
     equipmentname: {
         type:String,
         required: true,
-        minlength:5,
-        maxlength:50
+      
     },
     EquipmentCategory: {
         type: String,

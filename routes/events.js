@@ -18,17 +18,18 @@ router.post('/', async (req, res) => {
     // if (error) { console.log(error); return res.status(400).send(error.details[0].message); }
 
     events = new Event({
+        userid:req.body.userid,
         eventname: req.body.eventname,
         EventCategory: req.body.EventCategory,
         eventDate: req.body.eventDate,
         eventtime: req.body.eventtime,
-        Summary: req.body.Summary,
+        summary: req.body.summary,
 
     });
 
     await events.save();
-
-    res.send(_.pick(events, ["_id", "eventname", "EventCategory", "eventDate", "eventtime", "Summary"]));
+    res.send("event created")
+    // res.send(_.pick(events, ["_id", "eventname", "EventCategory", "eventDate", "eventtime", "Summary"]));
     //res.header('x-auth-token', token).send(_.pick(user, ["_id","name","email","userType"]));
 })
 
@@ -43,6 +44,20 @@ router.get('/', async (req, res) => {
     const events = await Event.find();
     res.send(events);
 });
+
+router.get('/user/:id', async (req, res) =>{
+    const event = await Event.find({
+        userid:req.params.id
+    })
+    .populate('userid', 'name userType')
+    .populate('applicants')
+    res.send(event);
+});
+
+router.get('/all' , async (req,res) =>{
+    const event = await Event.find().populate('userid','name userType');
+    res.send(event);
+})
 
 //router.get('/me', [auth, admin], async (req, res) => {
 // router.get('/:id', async (req, res) => {
@@ -62,7 +77,7 @@ router.put('/updateevents/:id', async (req, res) => {
         events.EventCategory = req.body.EventCategory,
         events.eventDate = req.body.eventDate,
         events.eventtime = req.body.eventtime,
-        events.Summary = req.body.Summary
+        events.summary = req.body.summary
 
 
     let promises = [];

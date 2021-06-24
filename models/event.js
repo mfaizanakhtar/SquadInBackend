@@ -4,6 +4,11 @@ const jwt = require("jsonwebtoken");
 const config = require('config');
 
 const eventSchema = new mongoose.Schema({
+    userid:
+    {
+        type:mongoose.Schema.Types.ObjectId,
+        ref:'User'
+    },
     eventname: {
         type:String,
         required: true
@@ -20,10 +25,19 @@ const eventSchema = new mongoose.Schema({
     eventtime: {
         type: String
      },
-     Summary: {
+     summary: {
         type: String,
         required: true,
      },
+     applicants:[{
+         type:mongoose.Schema.Types.ObjectId,
+         ref:'User'
+     }],
+     eventResponse:{
+         managername:String,
+         teamname:String,
+         address:String
+     }
 
     
 
@@ -32,11 +46,12 @@ const eventSchema = new mongoose.Schema({
 
 function validateEvent(event) {
     const schema = {
+        userid:Joi.string().required(),
         eventname: Joi.string().required(),
         EventCategory: Joi.string().required(),
         eventDate: Joi.string().required(),
         eventtime: Joi.string().required(),
-        Summary:Joi.string().required(),
+        summary:Joi.string().required(),
     
     };
     return Joi.validate(event, schema);

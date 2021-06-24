@@ -68,5 +68,17 @@ router.get('/accepteduser/:userid',async(req,res)=>{
     .populate('feedid')
     res.send(actResponse);
 })
+router.get('/noofres/:userid', async(req,res)=>{
+    const notif = await  activityResponse.find({
+        userid:req.params.userid,
+        
+    }).countDocuments(function(err,cou){
+        console.log(cou);
+        res.json(cou);
+    });
+    
+    
+    
+});
 
 module.exports = router

@@ -14,10 +14,13 @@ const Notification = require('./routes/notifications')
 const EquipmentResponse = require('./routes/equipmentReponses')
 const socket = require('socket.io');
 const activityResponse = require('./routes/activityresponses');
+const eventreponse = require('./routes/eventresponses')
 const { disableDebugTools } = require('@angular/platform-browser');
 const bodyParser = require('body-parser');
 var cors = require('cors');
-const comment = require('./routes/comments')
+const comment = require('./routes/comments');
+const biodata = require('./routes/biodatas');
+const team = require('./routes/teams');
 
 
 email=[];
@@ -165,6 +168,9 @@ app.use('/api/activityResponses',activityResponse)
 app.use('/api/notifications',Notification)
 app.use('/api/EquipmentResponse',EquipmentResponse)
 app.use('/api/comments',comment);
+app.use('/api/eventresponse', eventreponse);
+app.use('/api/biodata', biodata);
+app.use('/api/teams',team);
 
 
 

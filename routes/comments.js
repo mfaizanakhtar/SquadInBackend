@@ -11,7 +11,7 @@ router.post('/',async(req,res)=>{
 
     await comment.save();
 
-    res.status(200).send({message:"Comment added"});
+    res.status(200).send({message:"Comment added!"});
 })
 
 router.get('/',async(req,res)=>{

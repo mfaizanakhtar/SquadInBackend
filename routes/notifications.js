@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
 const express = require('express')
 const router = express.Router()
-const {Notification} = require('../models/notification')
+const {Notification} = require('../models/notification');
+const { count } = require('console');
 
 router.get('/user/:id',async(req,res)=>{
     const notif = await Notification.find({
@@ -37,5 +38,17 @@ router.put('/userseen/:id',async(req,res)=>{
 
     res.send(notif)
 })
+
+router.get('/noofnot/:id', async(req,res)=>{
+    const notif = await  Notification.find({
+        userid:req.params.userid
+    }).countDocuments(function(err,cou){
+        console.log(cou);
+        res.json(cou);
+    });
+    
+    
+    
+});
 
 module.exports = router
