@@ -23,7 +23,7 @@ const eventResponseSchema = new mongoose.Schema({
     },
     Accept:{
         type:Boolean,
-        default:null
+        default:true
     },
     AcceptMessage:{
         type:String

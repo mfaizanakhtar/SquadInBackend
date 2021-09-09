@@ -37,17 +37,7 @@ router.get('/user/:userid',async(req,res)=>{
 
 router.put('/accept/:responseid',async(req,res)=>{
     // console.log('api called'+req.params.responseid)
-    // const eveResponse = await eventResponse.updateMany({
-    //     _id:req.params.responseid
-    // },{
-    //     $set:{
-    //     Accepted:true,
-    //     AcceptMessage:req.body.acceptmessage,
-    //     AcceptById:req.body.AcceptById
-    // }
-    // })
-
-    const eveResponse = await eventResponse.findOneAndUpdate({
+    const eveResponse = await eventResponse.updateMany({
         _id:req.params.responseid
     },{
         $set:{
@@ -57,9 +47,7 @@ router.put('/accept/:responseid',async(req,res)=>{
     }
     })
 
-    await Event.update({_id:eveResponse.eventid},{
-        $push:{applicants:eveResponse.userid}
-    })
+    // Event.update()
     console.log(eveResponse)
     res.send(eveResponse)
 })
@@ -75,13 +63,12 @@ router.put('/accept/:responseid',async(req,res)=>{
 //     res.send(actRes)
 // })
 
-router.get('/accepteduser/:userid',async(req,res)=>{
+router.get('/',async(req,res)=>{
     const eveResponse = await eventResponse.find({
-        userid:req.params.userid,
-        Accept:true
     })
-    .populate('userid','name')
+    .populate('userid','name userType')
     .populate('eventid')
+    console.log(eveResponse);
     res.send(eveResponse);
 })
 

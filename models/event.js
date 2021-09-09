@@ -32,12 +32,7 @@ const eventSchema = new mongoose.Schema({
      applicants:[{
          type:mongoose.Schema.Types.ObjectId,
          ref:'User'
-     }],
-     eventResponse:{
-         managername:String,
-         teamname:String,
-         address:String
-     }
+     }]
 
     
 

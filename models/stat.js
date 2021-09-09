@@ -36,11 +36,9 @@ const statSchema = new mongoose.Schema({
      link:{
          type:String,
          required: true,
-     }
-
-    
-
-    
+     },
+     Score:Number
+  
 })
 
 function validateStat(stat) {
@@ -52,8 +50,8 @@ function validateStat(stat) {
         Performance: Joi.string().required(),
         Summary:Joi.string().required(),
         link:Joi.string().required(),
-    
-    };
+        Score:Joi.number().required()
+    }
     return Joi.validate(stat, schema);
 }
 
