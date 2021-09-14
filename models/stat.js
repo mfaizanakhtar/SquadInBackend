@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const jwt = require("jsonwebtoken");
 const config = require('config');
 const any = require('joi/lib/types/any');
+const boolean = require('joi/lib/types/boolean');
 
 const statSchema = new mongoose.Schema({
     id:{
@@ -37,7 +38,12 @@ const statSchema = new mongoose.Schema({
          type:String,
          required: true,
      },
-     Score:Number
+     Score:Number,
+     reported:{
+         type:Boolean,
+         default:false
+     },
+     reportReason:String
   
 })
 

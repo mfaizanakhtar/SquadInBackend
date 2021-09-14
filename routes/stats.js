@@ -80,7 +80,7 @@ router.get('/averageStats/:sports',async(req,res)=>{
             $match:{SportsCategory:req.params.sports}
         },
         {
-            $group:{_id:"$id",Count:{$sum:1},Score:{$sum:"$Score"},name:{$first:"$name"} }
+            $group:{_id:"$id",Count:{$sum:1},Score:{$sum:"$Score"},name:{$first:"$name"},reported:{$first:"$reported"},reportReason:{$first:"$reportReason"} }
         },
         {
             $set:{
@@ -94,6 +94,19 @@ router.get('/averageStats/:sports',async(req,res)=>{
 
     console.log(stat)
     res.send(stat)
+})
+
+router.put('/report/:id',async(req,res)=>{
+    // console.log(req.params.id)
+    // console.log(req.body)
+    if(req.body.reason=="withdraw"){
+        var updateResult = await Stat.updateMany({id:req.params.id},{reported:false})
+    }
+    else {
+        var updateResult = await Stat.updateMany({id:req.params.id},{reported:true,reportReason:req.body.reason})
+    }
+
+    res.send(updateResult)
 })
     
 
